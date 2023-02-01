@@ -1,5 +1,5 @@
 # Build tools Dockerfile
-image: quay.io/pantheon-public/build-tools-ci:8.x-php7.4
+image: quay.io/pantheon-public/build-tools-ci:8.x-php8.1
 
 # Default Variables
 variables:
@@ -66,6 +66,7 @@ test:static:
 
 deploy:dev:
   stage: deploy
+  # This job should depend on any previous job that generates artifacts so that they get correctly passed.
   dependencies: []
   environment:
     name: deploy/master
@@ -78,6 +79,7 @@ deploy:dev:
 
 deploy:multidev:
   stage: deploy
+  # This job should depend on any previous job that generates artifacts so that they get correctly passed.
   dependencies: []
   environment:
     name: deploy/pr-$CI_MERGE_REQUEST_IID
